@@ -9,12 +9,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
 
-
 class MainActivity : AppCompatActivity(), SensorEventListener {
     lateinit var Accelerometer: SensorManager
- var x: Float = 0F
-     var y: Float = 0F
-     var z: Float = 0F
+    var x: Float = 0F
+    var y: Float = 0F
+    var z: Float = 0F
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -35,17 +34,17 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         x = (alpha * event.values[0] + (1 - alpha) * event.values[0]).toFloat();
         y = (alpha * event.values[1] + (1 - alpha) * event.values[1]).toFloat();
         z = (alpha * event.values[2] + (1 - alpha) * event.values[2]).toFloat();
-if(x == 9.81F || x == -9.81F){
-y = 0F
-    z = 0F
-}
+        if(x == 9.81F || x == -9.81F){
+            y = 0F
+            z = 0F
+        }
 
-        if(y >= 9.81F || y == -9.81F){
+        if(y == 9.81F || y == -9.81F){
             x = 0F
             z = 0F
         }
 
-        if(z >= 9.81F || z == -9.81F){
+        if(z == 9.81F || z == -9.81F){
             x = 0F
             y = 0F
         }
@@ -56,6 +55,4 @@ y = 0F
     override fun onAccuracyChanged(p0: Sensor?, p1: Int) {
 
     }
-
-
 }
