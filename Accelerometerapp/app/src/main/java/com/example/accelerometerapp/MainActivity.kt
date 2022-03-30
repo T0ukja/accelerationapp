@@ -20,37 +20,32 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
         setContentView(R.layout.activity_main)
         Accelerometer = getSystemService(Context.SENSOR_SERVICE) as SensorManager
-        Accelerometer.registerListener(this,Accelerometer.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
+        Accelerometer.registerListener(this,Accelerometer.getDefaultSensor
+            (Sensor.TYPE_ACCELEROMETER)
             ,SensorManager.SENSOR_DELAY_FASTEST)
 
     }
 
     override fun onSensorChanged(event: SensorEvent) {
         val Accelerotext: TextView = findViewById(R.id.Acc)
-
-
-        var alpha = 0.8;
-
-        x = (alpha * event.values[0] + (1 - alpha) * event.values[0]).toFloat();
-        y = (alpha * event.values[1] + (1 - alpha) * event.values[1]).toFloat();
-        z = (alpha * event.values[2] + (1 - alpha) * event.values[2]).toFloat();
+        x = event.values[0]
+        y = event.values[1]
+        z = event.values[2]
         if(x == 9.81F || x == -9.81F){
             y = 0F
             z = 0F
         }
-
         if(y == 9.81F || y == -9.81F){
             x = 0F
             z = 0F
         }
-
         if(z == 9.81F || z == -9.81F){
             x = 0F
             y = 0F
         }
-
         Accelerotext.text="X =${x}\n"+ "Y= ${y}\n" + "Z = ${z}"
     }
+
 
     override fun onAccuracyChanged(p0: Sensor?, p1: Int) {
 
